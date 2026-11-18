@@ -12,11 +12,11 @@ Projeto acadêmico que importa leituras históricas de temperatura de sensores I
 ## Estrutura
 ```text
 pipeline_iot_docker/
-├── data/                 # coloque aqui o CSV baixado do Kaggle
-├── docs/                 # documentação e capturas de tela
-├── sql/views.sql         # views analíticas
-├── src/pipeline.py       # ingestão e tratamento
-├── src/dashboard.py      # dashboard
+├── data/                 
+├── docs/                
+├── sql/views.sql        
+├── src/pipeline.py       
+├── src/dashboard.py      
 ├── .env.example
 ├── docker-compose.yml
 └── requirements.txt
@@ -29,7 +29,6 @@ https://www.kaggle.com/datasets/atulanandjha/temperature-readings-iot-devices
 Coloque o arquivo na pasta `data` e renomeie para `IOT-temp.csv`.
 
 ## 2. Configurar ambiente
-No terminal, dentro da pasta do projeto:
 
 Windows (PowerShell):
 ```powershell
@@ -38,7 +37,6 @@ py -m venv .venv
 pip install -r requirements.txt
 Copy-Item .env.example .env
 ```
-Se o PowerShell bloquear a ativação, use `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` e tente novamente.
 
 Linux/macOS:
 ```bash
@@ -47,7 +45,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
 ```
-Edite `.env` e troque a senha de exemplo por uma senha sua. Não publique `.env` no GitHub.
 
 ## 3. Iniciar PostgreSQL
 ```bash
@@ -67,7 +64,7 @@ O programa normaliza os nomes das colunas do CSV, converte data e temperatura, r
 ```bash
 streamlit run src/dashboard.py
 ```
-Abra o endereço local exibido no terminal (normalmente http://localhost:8501).
+Abra o endereço local exibido no terminal.
 
 ## 6. Views SQL
 1. `avg_temp_por_local`: média e quantidade de leituras por ambiente (interno/externo).
@@ -88,7 +85,6 @@ SELECT * FROM temp_max_min_por_dia LIMIT 10;
 ```
 
 ## 8. Git e GitHub
-Crie um repositório público vazio no GitHub. Depois:
 ```bash
 git init
 git add .
@@ -114,7 +110,7 @@ git config --global user.email "seu.email@exemplo.com"
 ```
 
 ## 9. Capturas e documentação
-Salve em `docs/` capturas reais do dashboard aberto no navegador e inclua-as no relatório PDF. Não use imagens fictícias: execute o projeto primeiro.
+Salva em `docs/` capturas reais do dashboard aberto no navegador.
 
 ## Fonte dos dados
 Atul Anand Jha, **Temperature Readings: IoT Devices**, Kaggle:
