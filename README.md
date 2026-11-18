@@ -116,3 +116,5 @@ Atul Anand Jha, **Temperature Readings: IoT Devices**, Kaggle:
 https://www.kaggle.com/datasets/atulanandjha/temperature-readings-iot-devices
 
 O CSV original possui campos como `id`, `room_id/id`, `noted_date`, `temp` e `out/in`. O pipeline padroniza esses nomes antes de armazenar os registros.
+
+

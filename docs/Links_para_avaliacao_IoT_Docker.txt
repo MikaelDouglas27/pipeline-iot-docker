@@ -1,0 +1,12 @@
+LINKS PARA AVALIAÇÃO — PIPELINE DE DADOS COM IoT E DOCKER
+
+1. Repositório público do projeto (GitHub)
+https://github.com/MikaelDouglas27/pipeline-iot-docker
+
+2. Base de dados utilizada (Kaggle — Temperature Readings: IoT Devices)
+https://www.kaggle.com/datasets/atulanandjha/temperature-readings-iot-devices
+
+INFORMAÇÕES IMPORTANTES
+- O código-fonte, o README e a documentação/evidências estão disponíveis no repositório do GitHub.
+- O dashboard Streamlit foi executado localmente. Portanto, não possui uma URL pública de acesso neste momento.
+- Para reproduzir o projeto, o professor deve seguir as instruções do README.md no repositório.
