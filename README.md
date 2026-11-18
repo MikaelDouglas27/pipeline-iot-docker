@@ -1,6 +1,5 @@
 # Pipeline de Dados com IoT e Docker
 
-Projeto acadêmico que importa leituras históricas de temperatura de sensores IoT, trata os dados com Python/Pandas, armazena no PostgreSQL em Docker e apresenta análises em um dashboard Streamlit.
 
 ## Tecnologias
 - Python e Pandas: leitura e limpeza do CSV.
