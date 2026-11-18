@@ -1,1 +1,0 @@
-Baixe o CSV do Kaggle, coloque nesta pasta e renomeie para IOT-temp.csv.
