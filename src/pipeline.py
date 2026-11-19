@@ -44,20 +44,62 @@ def normalize_columns(df):
     df = df.drop_duplicates(subset=["reading_id"])
     return df[["reading_id", "room_id", "noted_at", "temperature", "location"]]
 
+
 def main():
     if not os.path.exists(CSV_PATH):
-        raise FileNotFoundError(f"CSV não encontrado: {CSV_PATH}. Baixe o Kaggle e coloque-o em data/IOT-temp.csv.")
+        raise FileNotFoundError(
+            f"CSV não encontrado: {CSV_PATH}. "
+            "Baixe o Kaggle e coloque-o em data/IOT-temp.csv."
+        )
+
     raw = pd.read_csv(CSV_PATH)
     clean = normalize_columns(raw)
     engine = get_engine()
-    clean.to_sql("temperature_readings", engine, if_exists="replace", index=False, chunksize=5000, method="multi")
+
     with engine.begin() as conn:
-        conn.execute(text("ALTER TABLE temperature_readings ADD PRIMARY KEY (reading_id)"))
-        with open(os.path.join(ROOT, "sql", "views.sql"), encoding="utf-8") as f:
+        tabela_existe = conn.execute(
+            text("SELECT to_regclass('public.temperature_readings') IS NOT NULL")
+        ).scalar()
+
+        if tabela_existe:
+            conn.execute(text("DELETE FROM temperature_readings"))
+
+            clean.to_sql(
+                "temperature_readings",
+                conn,
+                if_exists="append",
+                index=False,
+                chunksize=5000,
+                method="multi"
+            )
+        else:
+            clean.to_sql(
+                "temperature_readings",
+                conn,
+                if_exists="fail",
+                index=False,
+                chunksize=5000,
+                method="multi"
+            )
+
+            conn.execute(text(
+                "ALTER TABLE temperature_readings "
+                "ADD PRIMARY KEY (reading_id)"
+            ))
+
+        with open(
+            os.path.join(ROOT, "sql", "views.sql"),
+            encoding="utf-8"
+        ) as f:
             for statement in f.read().split(";"):
                 if statement.strip():
                     conn.execute(text(statement))
-    print(f"Pipeline concluído: {len(clean)} leituras inseridas no PostgreSQL.")
+
+    print(
+        f"Pipeline concluído: {len(clean)} "
+        "leituras inseridas no PostgreSQL."
+    )
+
 
 if __name__ == "__main__":
     main()
